@@ -1,0 +1,139 @@
+version: "3.8"
+
+services:
+  site:
+    build:
+      context: .envs/dev
+      dockerfile: nginx/Dockerfile
+      args:
+        NGINXUSER: www-data
+        NGINXGROUP: www-data
+    container_name: nginx
+    image: vnext-nginx:dev
+    ports:
+      - 80:80
+    volumes:
+      - ./.envs/dev/nginx/conf.d:/etc/nginx/conf.d
+      - ./.envs/dev/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - .:/var/www/app
+    depends_on:
+      - php
+      - redis
+      - mysql
+    working_dir: /var/www/app
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: .envs/dev
+      dockerfile: php/Dockerfile
+      args:
+        TZ: Asia/Tokyo
+        PHPUSER: www-data
+        PHPGROUP: www-data
+    image: vnext-php:dev
+    restart: on-failure
+    container_name: php
+    volumes:
+      - .:/var/www/app
+      - composer_cache:/root/.composer
+    expose:
+      - "9000"
+    working_dir: /var/www/app
+    networks:
+      - laravel
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 3306:3306
+    volumes:
+      - ./.envs/dev/mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - laravel
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    networks:
+      - laravel
+
+  npm:
+    image: node:13.7
+    container_name: npm
+    volumes:
+      - .:/var/www/app
+    ports:
+      - 3000:3000
+      - 3001:3001
+    working_dir: /var/www/app
+    entrypoint: [ 'npm' ]
+    networks:
+      - laravel
+
+  artisan:
+    build:
+      context: .envs/dev
+      dockerfile: php/Dockerfile
+      args:
+        TZ: Asia/Tokyo
+        PHPUSER: www-data
+        PHPGROUP: www-data
+    container_name: artisan
+    volumes:
+      - .:/var/www/app
+    depends_on:
+      - mysql
+    working_dir: /var/www/app
+    entrypoint: [ 'php', '/var/www/app/artisan' ]
+    networks:
+      - laravel
+
+  composer:
+    build:
+      context: .envs/dev
+      dockerfile: php/composer.dockerfile
+      args:
+        PHPUSER: www-data
+        PHPGROUP: www-data
+    container_name: composer
+    volumes:
+      - .:/var/www/app
+    working_dir: /var/www/app
+    depends_on:
+      - php
+    user: www-data
+    entrypoint: [ 'composer', '--ignore-platform-reqs' ]
+    networks:
+      - laravel
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - laravel
+networks:
+  laravel:
+    name: laravel
+    driver: bridge
+
+volumes:
+  composer_cache:
+    external: true
