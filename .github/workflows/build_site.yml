@@ -9,6 +9,7 @@ jobs:
     name: Laravel 8.x & PHP 7.4
     runs-on: ubuntu-latest
     env:
+      DB_HOST: 127.0.0.1
       DB_DATABASE: laravel
       DB_USERNAME: root
       DB_PASSWORD: password
