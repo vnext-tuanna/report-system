@@ -64,6 +64,6 @@ jobs:
       - name: Run PHPCS for the codestyle
         id: vnext-coding-standards
         run: vendor/bin/phpcs --standard=phpcs.xml --extensions=php --encoding=utf-8 .
-      - name: Test with phpunit
-        id: php-unit-tests
-        run: vendor/bin/phpunit --coverage-text
+#      - name: Test with phpunit
+#        id: php-unit-tests
+#        run: vendor/bin/phpunit --coverage-text
