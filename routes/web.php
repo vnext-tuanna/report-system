@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('home');
     });
 
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
