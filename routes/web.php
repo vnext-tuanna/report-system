@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+###################
+# GUEST
+###################
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 });
+
+###################
+# AUTH
+###################
