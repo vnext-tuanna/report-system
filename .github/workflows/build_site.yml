@@ -14,7 +14,7 @@ jobs:
       DB_PASSWORD: password
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
           MYSQL_ROOT_PASSWORD: password
@@ -56,11 +56,11 @@ jobs:
         run: php artisan config:cache
       - name: Clear & cache view
         run: php artisan view:cache
-      - name: Run Migration
-        id: build-app
-        run: php artisan migrate:fresh --seed
-        env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+#      - name: Run Migration
+#        id: build-app
+#        run: php artisan migrate:fresh --seed
+#        env:
+#          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
       - name: Run PHPCS for the codestyle
         id: vnext-coding-standards
         run: vendor/bin/phpcs --standard=phpcs.xml --extensions=php --encoding=utf-8 .
