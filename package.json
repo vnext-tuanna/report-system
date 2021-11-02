@@ -9,8 +9,8 @@
         "prod": "npm run production",
         "production": "mix --production",
         "postinstall": "husky install",
-        "php-lint": "./vendor/bin/phpcs .",
-        "php-fix": "./vendor/bin/phpcbf ."
+        "php:lint": "./vendor/bin/phpcs .",
+        "php:fix": "./vendor/bin/phpcbf ."
     },
     "devDependencies": {
         "@commitlint/cli": "^12.1.4",
@@ -21,6 +21,10 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "sass": "^1.43.4",
-        "sass-loader": "^12.3.0"
+        "sass-loader": "^12.3.0",
+        "lint-staged": "^11.2.0"
+    },
+    "lint-staged": {
+        "**/*.php": ["./vendor/bin/phpcs ."]
     }
 }
