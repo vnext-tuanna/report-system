@@ -10,13 +10,14 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@commitlint/cli": "^12.1.4",
+        "@commitlint/config-conventional": "^12.1.4",
         "axios": "^0.21",
+        "husky": "^7.0.4",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "sass": "^1.43.4",
-        "sass-loader": "^12.3.0",
-        "@commitlint/cli": "^12.1.4",
-        "@commitlint/config-conventional": "^12.1.4"
+        "sass-loader": "^12.3.0"
     }
 }
