@@ -9,7 +9,6 @@ jobs:
     name: Laravel 8.x & PHP 7.4
     runs-on: ubuntu-latest
     env:
-      DB_HOST: 127.0.0.1
       DB_DATABASE: laravel
       DB_USERNAME: root
       DB_PASSWORD: password
@@ -21,7 +20,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: laravel
         ports:
-          - 3306/tcp
+          - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -61,12 +60,10 @@ jobs:
         id: build-app
         run: php artisan migrate:fresh --seed
         env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          DB_PORT: 33306
       - name: Run PHPCS for the codestyle
         id: vnext-coding-standards
         run: vendor/bin/phpcs --standard=phpcs.xml --extensions=php --encoding=utf-8 .
       - name: Test with phpunit
         id: php-unit-tests
         run: vendor/bin/phpunit --coverage-text
-        env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
