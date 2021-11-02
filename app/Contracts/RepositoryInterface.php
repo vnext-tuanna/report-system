@@ -144,6 +144,4 @@ interface RepositoryInterface
      * @return mixed
      */
     public function __call(string $method, array $arguments);
-
-
 }

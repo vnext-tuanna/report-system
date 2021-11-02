@@ -267,7 +267,7 @@ abstract class BaseRepository implements RepositoryInterface
      *
      * @return mixed
      */
-    public function paginate($limit = null, array $columns = ['*'], string $method = "paginate")
+    public function paginate($limit = null, array $columns = ['*'], string $method = 'paginate')
     {
         $limit = is_null($limit) ? 15 : $limit;
         $results = $this->model->{$method}($limit, $columns);
@@ -320,5 +320,4 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return call_user_func_array([$this->model, $method], $arguments);
     }
-
 }

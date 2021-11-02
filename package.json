@@ -8,7 +8,9 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "postinstall": "husky install"
+        "postinstall": "husky install",
+        "php-lint": "./vendor/bin/phpcs .",
+        "php-fix": "./vendor/bin/phpcbf ."
     },
     "devDependencies": {
         "@commitlint/cli": "^12.1.4",
