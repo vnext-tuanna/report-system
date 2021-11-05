@@ -25,6 +25,12 @@
         "lint-staged": "^11.2.0"
     },
     "lint-staged": {
-        "**/*.php": ["./vendor/bin/phpcs ."]
+        "**/*.php": [
+            "./vendor/bin/phpcs ."
+        ]
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.10.2",
+        "bootstrap": "^5.1.3"
     }
 }
