@@ -18,14 +18,12 @@ use Illuminate\Support\Facades\Route;
 ###################
 
 
-Route::get('/', function () {
+Route::get('/client', function () {
         return view('client.index');
 });
-Route::get('/login', function (){
-   return view('client.login');
+Route::get('/login', function () {
+    return view('client.login');
 });
-
-
 Route::get('/user', function () {
     return view('client.user.index');
 });
