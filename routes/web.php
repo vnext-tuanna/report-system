@@ -17,14 +17,31 @@ use Illuminate\Support\Facades\Route;
 # GUEST
 ###################
 
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('/', function () {
-        return view('home');
-    });
 
-    Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+Route::get('/', function () {
+        return view('client.index');
+});
+Route::get('/login', function (){
+   return view('client.login');
 });
 
+
+Route::get('/user', function () {
+    return view('client.user.index');
+});
+Route::get('/user/profile', function () {
+    return view('client.user.profile');
+});
+
+Route::get('/request', function () {
+    return view('client.request.index');
+});
+Route::get('/request/add', function () {
+    return view('client.request.add');
+})->name('request.add');
+Route::get('/report', function () {
+    return view('client.report.add');
+});
 ###################
 # AUTH
 ###################

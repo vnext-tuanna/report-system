@@ -15,6 +15,7 @@ const publicJsFolder = 'public/js';
 const publicFontFolder = 'public/fonts';
 
 mix.js('resources/js/app.js', publicJsFolder)
+    .js('resources/js/CKEditor.js', publicJsFolder)
     .sass('resources/scss/app.scss', publicCssFolder);
 
 
