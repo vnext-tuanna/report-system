@@ -3,10 +3,7 @@
 @section('content')
     <div class="container">
         <table
-            id="example"
-            class="table table-striped table-bordered dt-responsive nowrap"
-            style="width: 100%"
-        >
+            id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%" >
             <thead>
                 <tr>
                     <th>ID</th>
