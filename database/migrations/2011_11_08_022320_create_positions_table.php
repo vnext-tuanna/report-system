@@ -14,9 +14,9 @@ class CreatePositionsTable extends Migration
     public function up()
     {
         Schema::create('positions', function (Blueprint $table) {
-            $table->bigInteger('id')->autoIncrement();
+            $table->id();
             $table->string('name', 15);
-            $table->bigInteger('division_id');
+            $table->unsignedBigInteger('division_id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('division_id')->references('id')->on('divisions');

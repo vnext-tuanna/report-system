@@ -14,11 +14,11 @@ class CreateRequestsTable extends Migration
     public function up()
     {
         Schema::create('requests', function (Blueprint $table) {
-            $table->bigInteger('id')->autoIncrement();
+            $table->id();
             $table->string('type');
             $table->longText('content');
-            $table->bigInteger('user_id');
-            $table->bigInteger('to_user_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('to_user_id');
             $table->date('start_date');
             $table->date('end_date');
             $table->unsignedSmallInteger('status');
